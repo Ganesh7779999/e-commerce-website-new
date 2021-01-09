@@ -13,10 +13,10 @@ const HeaderComponent = () => (
         SHOP
       </Link>
       <Link to="/ShopPage" className="option">
-        SHOP
+        CONTACT
       </Link>
-      <Link to="/ShopPage" className="option">
-        SHOP
+      <Link to="/Signin&Register" className="option">
+        SIGN IN/REGISTER
       </Link>
     </div>
   </div>
