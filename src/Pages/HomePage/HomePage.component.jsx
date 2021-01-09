@@ -3,9 +3,12 @@ import "./homepage.styles.scss";
 
 import DirectoryComponent from "../../Components/Directory/Directory.component";
 
-const HomePageComponent = () => (
-  <div className="homepage">
-    <DirectoryComponent />
-  </div>
-);
+const HomePageComponent = (props) => {
+  console.log(props);
+  return (
+    <div className="homepage">
+      <DirectoryComponent />
+    </div>
+  );
+};
 export default HomePageComponent;
