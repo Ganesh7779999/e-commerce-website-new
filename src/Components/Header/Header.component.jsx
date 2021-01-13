@@ -5,7 +5,11 @@ import { ReactComponent as WebsiteLogo } from "../../Assets/crown.svg";
 
 import { auth } from "../../Firebase/Firebase.utils.js";
 
-const HeaderComponent = (props) => (
+import { connect } from "react-redux"; //connect is a Higher order component,that will modify our headerComponnet to have access to redux
+
+const HeaderComponent = (
+  { currentUser } //This currentUser came from the connect() below.
+) => (
   <div className="header">
     <Link className="logo-container" to="/">
       <WebsiteLogo className="logo" />
@@ -17,7 +21,7 @@ const HeaderComponent = (props) => (
       <Link to="/ShopPage" className="option">
         CONTACT
       </Link>
-      {props.currentUser ? ( //here currentUser is true if it is an object
+      {currentUser ? ( //here currentUser is true if it is an object
         <div className="option" onClick={() => auth.signOut()}>
           SIGN OUT
         </div>
@@ -29,4 +33,12 @@ const HeaderComponent = (props) => (
     </div>
   </div>
 );
-export default HeaderComponent;
+
+const mapStateToProps = (state) => ({
+  //here state input is the RootReducer
+  currentUser: state.user.currentUser,
+});
+
+export default connect(mapStateToProps)(HeaderComponent); //now this will give currentUser
+
+//connect() and mapStateToProps are the IMPORTANT FUNCTIONS which will give access to the reducers

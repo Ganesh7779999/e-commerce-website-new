@@ -9,24 +9,29 @@ import SignInAndSignUpPageComponent from "./Pages/SignInAndSignUpPage/SignInAndS
 import { auth } from "./Firebase/Firebase.utils";
 import { createUserProfileDocument } from "./Firebase/Firebase.utils";
 
-class App extends React.Component {
-  constructor() {
-    super();
+import { connect } from "react-redux";
+import { setCurrentUser } from "./Redux/User/UserAction"; //ACTION
 
-    this.state = {
-      currentUser: null,
-    };
-  }
+class App extends React.Component {
+  // constructor() {
+  //   super();
+
+  //   this.state = {
+  //     currentUser: null,
+  //   };
+  // }
   unSubscribeFromAuth = null; //method which null
 
   componentDidMount() {
+    const { setCurrentUser } = this.props;
+
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
       //onAuthStateChanged refers to when there is any new user or not.it will check in the users list
       // this.setState({ currentUser: user });
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
         userRef.onSnapshot((snapShot) => {
-          this.setState({
+          setCurrentUser({
             currentUser: {
               id: snapShot.id,
               ...snapShot.data(),
@@ -35,7 +40,7 @@ class App extends React.Component {
           console.log(this.state);
         });
       } else {
-        this.setState({ currentUser: userAuth });
+        setCurrentUser(userAuth);
       }
     });
   }
@@ -45,7 +50,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <HeaderComponent currentUser={this.state.currentUser} />
+        <HeaderComponent />
         <Switch>
           <Route exact path="/" component={HomePageComponent} />
           <Route exact path="/ShopPage" component={ShopPageComponent} />
@@ -60,4 +65,7 @@ class App extends React.Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = (dispatch) => ({
+  setCurrentUser: (user) => dispatch(setCurrentUser(user)), //here user is the object and dispatch() will pass the user action object to every reducers and dispatch() will return the object from setCurrentUser
+});
+export default connect(null, mapDispatchToProps)(App);
