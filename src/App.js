@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
 import HomePageComponent from "./Pages/HomePage/HomePage.component.jsx";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import ShopPageComponent from "./Pages/ShopPage/ShopPage.component.jsx";
 import HeaderComponent from "./Components/Header/Header.component.jsx";
 import SignInAndSignUpPageComponent from "./Pages/SignInAndSignUpPage/SignInAndSignUpPage.component.jsx";
@@ -57,7 +57,13 @@ class App extends React.Component {
           <Route
             exact
             path="/Signin&Register"
-            component={SignInAndSignUpPageComponent}
+            render={() =>
+              this.props.currentUser ? (
+                <Redirect />
+              ) : (
+                <SignInAndSignUpPageComponent />
+              )
+            }
           />
         </Switch>
       </div>
@@ -65,7 +71,12 @@ class App extends React.Component {
   }
 }
 
+const mapStateToProps = ({ user }) => ({
+  // destructuring userReducer
+  currentUser: user.currentUser,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setCurrentUser: (user) => dispatch(setCurrentUser(user)), //here user is the object and dispatch() will pass the user action object to every reducers and dispatch() will return the object from setCurrentUser
 });
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
