@@ -7,8 +7,11 @@ import { auth } from "../../Firebase/Firebase.utils.js";
 
 import { connect } from "react-redux"; //connect is a Higher order component,that will modify our headerComponnet to have access to redux
 
+import CartIconComponent from "../CartIcon/CartIcon.component";
+import CartDropDownComponent from "../CartDropDown/CartDropDown.component";
+
 const HeaderComponent = (
-  { currentUser } //This currentUser came from the connect() below.
+  { currentUser, hidden } //This currentUser came from the connect() below.
 ) => (
   <div className="header">
     <Link className="logo-container" to="/">
@@ -30,13 +33,16 @@ const HeaderComponent = (
           SIGN IN/REGISTER
         </Link>
       )}
+      <CartIconComponent />
     </div>
+    {hidden ? null : <CartDropDownComponent />}
   </div>
 );
 
 const mapStateToProps = (state) => ({
   //here state input is the RootReducer
   currentUser: state.user.currentUser,
+  hidden: state.cart.hidden,
 });
 
 export default connect(mapStateToProps)(HeaderComponent); //now this will give currentUser
