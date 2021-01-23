@@ -47,4 +47,6 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps)(HeaderComponent); //now this will give currentUser
 
+
+//connect() is a HOC and it will give access to things related to redux
 //connect() and mapStateToProps are the IMPORTANT FUNCTIONS which will give access to the reducers

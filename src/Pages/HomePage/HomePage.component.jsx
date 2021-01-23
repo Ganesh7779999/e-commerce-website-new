@@ -3,8 +3,7 @@ import "./homepage.styles.scss";
 
 import DirectoryComponent from "../../Components/Directory/Directory.component";
 
-const HomePageComponent = (props) => {
-  console.log(props);
+const HomePageComponent = () => {
   return (
     <div className="homepage">
       <DirectoryComponent />

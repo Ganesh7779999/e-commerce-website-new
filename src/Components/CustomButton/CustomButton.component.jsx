@@ -3,7 +3,7 @@ import "./CustomButton.styles.scss";
 
 const CustomButtonComponent = (props) => (
   <button
-    className={`${
+    className={`${props.inverted ? "inverted" : ""} ${
       props.googleSignInButton ? "google-sign-in" : ""
     } custom-button`}
     type={props.type}

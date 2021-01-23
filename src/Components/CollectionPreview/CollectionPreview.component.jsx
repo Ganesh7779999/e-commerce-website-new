@@ -14,6 +14,7 @@ const CollectionPreviewComponent = (props) => (
             name={item.name}
             price={item.price}
             imageUrl={item.imageUrl}
+            item={item}
           />
         ))}
     </div>
