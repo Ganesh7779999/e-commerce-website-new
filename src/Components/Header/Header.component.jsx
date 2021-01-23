@@ -10,6 +10,10 @@ import { connect } from "react-redux"; //connect is a Higher order component,tha
 import CartIconComponent from "../CartIcon/CartIcon.component";
 import CartDropDownComponent from "../CartDropDown/CartDropDown.component";
 
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "../../Redux/User/UserSelector";
+import { selectCartHidden } from "../../Redux/Cart/CartSelector.js";
+
 const HeaderComponent = (
   { currentUser, hidden } //This currentUser came from the connect() below.
 ) => (
@@ -39,14 +43,18 @@ const HeaderComponent = (
   </div>
 );
 
-const mapStateToProps = (state) => ({
-  //here state input is the RootReducer
-  currentUser: state.user.currentUser,
-  hidden: state.cart.hidden,
+// const mapStateToProps = (state) => ({
+//here state input is the RootReducer
+//   currentUser: selectCurrentUser(state),
+//   hidden: selectCartHidden(state),
+// });
+
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 });
 
 export default connect(mapStateToProps)(HeaderComponent); //now this will give currentUser
-
 
 //connect() is a HOC and it will give access to things related to redux
 //connect() and mapStateToProps are the IMPORTANT FUNCTIONS which will give access to the reducers
