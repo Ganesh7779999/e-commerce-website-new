@@ -3,6 +3,7 @@ import "./App.css";
 import HomePageComponent from "./Pages/HomePage/HomePage.component.jsx";
 import { Route, Switch, Redirect } from "react-router-dom";
 import ShopPageComponent from "./Pages/ShopPage/ShopPage.component.jsx";
+import CheckOutPageComponent from "./Pages/CheckOut/CheckOutPage.component.jsx";
 import HeaderComponent from "./Components/Header/Header.component.jsx";
 import SignInAndSignUpPageComponent from "./Pages/SignInAndSignUpPage/SignInAndSignUpPage.component.jsx";
 
@@ -57,6 +58,7 @@ class App extends React.Component {
         <Switch>
           <Route exact path="/" component={HomePageComponent} />
           <Route exact path="/ShopPage" component={ShopPageComponent} />
+          <Route exact path="/CheckOut" component={CheckOutPageComponent} />
           <Route
             exact
             path="/Signin&Register"
