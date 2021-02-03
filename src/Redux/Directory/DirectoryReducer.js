@@ -7,14 +7,14 @@ const INITIAL_STATE = {
       linkUrl: "ShopPage/hats",
     },
     {
-      title: "jackets",
-      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
+      title: "sneakers",
+      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
       id: 2,
       linkUrl: "ShopPage/sneakers",
     },
     {
-      title: "sneakers",
-      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
+      title: "jackets",
+      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
       id: 3,
       linkUrl: "ShopPage/jackets",
     },
@@ -35,11 +35,11 @@ const INITIAL_STATE = {
   ],
 };
 
-const DirectoryReducer = (state = INITIAL_STATE, action) => {
+const directoryReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     default:
       return state;
   }
 };
 
-export default DirectoryReducer;
+export default directoryReducer;

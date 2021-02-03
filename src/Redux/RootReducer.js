@@ -4,7 +4,7 @@
 import { combineReducers } from "redux"; //combineReducers is function, it will combine reducers
 import userReducer from "./User/UserReducer";
 import cartReducer from "./Cart/CartReducer";
-import DirectoryReducer from "./Directory/DirectoryReducer";
+import directoryReducer from "./Directory/DirectoryReducer";
 import ShopReducer from "./Shop/ShopReducer";
 
 import { persistReducer } from "redux-persist";
@@ -13,14 +13,15 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
-  whoteList: ["cart"],
+  whitelist: ["cart"],
 };
 
 const rootReducer = combineReducers({
   //it is the big JSON OBJECT which will store all the reducers
   user: userReducer,
   cart: cartReducer,
-  directory: DirectoryReducer,
+  directory: directoryReducer,
   shop: ShopReducer,
 });
+// export default persistReducer(persistConfig, rootReducer);
 export default persistReducer(persistConfig, rootReducer);

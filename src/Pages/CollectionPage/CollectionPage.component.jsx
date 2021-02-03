@@ -5,13 +5,14 @@ import CollectionItemComponent from "../../Components/CollectionItem/CollectionI
 
 import { selectShopCollection } from "../ShopPage/ShopDataSelector";
 import { connect } from "react-redux";
-const CollectionPageComponent = ({ match, collection }) => {
+const CollectionPageComponent = ({ collection }) => {
   console.log(collection);
+  const { title, items } = collection;
   return (
     <div className="collection-page">
-      <h2 className="title">{collection.title}</h2>
+      <h2 className="title">{title}</h2>
       <div className="items">
-        {collection.items.map((item) => (
+        {items.map((item) => (
           <CollectionItemComponent
             key={item.id}
             name={item.name}

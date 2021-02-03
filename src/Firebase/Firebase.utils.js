@@ -43,6 +43,40 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
+export const addCollectionAndDocuments = async (colletionKey, objectsToAdd) => {
+  //collectionKey is collectionName
+  const collectionRef = firestore.collection(colletionKey);
+  //console.log(collectionRef);
+  const batch = firestore.batch();
+
+  objectsToAdd.forEach((obj) => {
+    const newDocRef = collectionRef.doc();
+    //collectionRef.doc() will create an empty document with a randomly generated doc id
+    //dddd
+    batch.set(newDocRef, obj);
+  });
+
+  return await batch.commit();
+};
+
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data();
+
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      id: doc.id,
+      title,
+      items,
+    };
+  });
+  console.log(transformedCollection);
+  return transformedCollection.reduce((accumulator, collection) => {
+    accumulator[collection.title.toLowerCase()] = collection;
+    return accumulator;
+  }, {});
+};
+
 const provider = new firebase.auth.GoogleAuthProvider(); //for google authentication
 provider.setCustomParameters({ prompt: "select_account" }); //it will access to selecting google accounts
 export const SignInWithGoogle = () => auth.signInWithPopup(provider); //it is MAIN METHOD which will give a popup with showing google accounts
